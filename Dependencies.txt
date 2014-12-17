@@ -1,0 +1,6 @@
+Flask
+SQLAlchemy
+scikit-learn
+numpy, scipy and co.
+MySQL-Python (one of the fastest MySQL connectors)
+

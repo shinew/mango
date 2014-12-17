@@ -1,0 +1,108 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+Authenticator	authenticator.py	/^class Authenticator:$/;"	c
+Authenticator	endpoints.py	/^from authenticator import Authenticator$/;"	i
+Authenticator	processor.py	/^from authenticator import Authenticator$/;"	i
+Base	endpoints.py	/^from database.setup import Session, Base, engine$/;"	i
+CURRENT_FEATURE_VERSION	scorer.py	/^    CURRENT_FEATURE_VERSION = 2$/;"	v	class:Scorer
+Counter	measurer.py	/^from collections import Counter$/;"	i
+DATE_FORMAT	validator.py	/^    DATE_FORMAT = "%Y-%m-%d %H:%M:%S"$/;"	v	class:Validator
+FileHandler	endpoints.py	/^    from logging import FileHandler, INFO$/;"	i
+Flask	endpoints.py	/^from flask import request, jsonify, abort, Flask$/;"	i
+HRV_STATS_EXE	scorer.py	/^    HRV_STATS_EXE = os.path.join("bin", "heart")$/;"	v	class:Scorer
+HeartRate	processor.py	/^from database import User, HeartRate, IntervalScore, TrainingInterval$/;"	i
+HeartRate	scorer.py	/^from database import HeartRate, TrainingInterval$/;"	i
+INFO	endpoints.py	/^    from logging import FileHandler, INFO$/;"	i
+IntervalScore	measurer.py	/^from database import IntervalScore, User$/;"	i
+IntervalScore	processor.py	/^from database import User, HeartRate, IntervalScore, TrainingInterval$/;"	i
+Measurer	endpoints.py	/^from measurer import Measurer$/;"	i
+Measurer	measurer.py	/^class Measurer:$/;"	c
+PIPE	scorer.py	/^from subprocess import Popen, PIPE, STDOUT$/;"	i
+Popen	scorer.py	/^from subprocess import Popen, PIPE, STDOUT$/;"	i
+Processor	endpoints.py	/^from processor import Processor$/;"	i
+Processor	processor.py	/^class Processor:$/;"	c
+RandomForestClassifier	scorer.py	/^from sklearn.ensemble import RandomForestClassifier$/;"	i
+STDOUT	scorer.py	/^from subprocess import Popen, PIPE, STDOUT$/;"	i
+Scorer	endpoints.py	/^from scorer import Scorer$/;"	i
+Scorer	scorer.py	/^class Scorer:$/;"	c
+Session	endpoints.py	/^from database.setup import Session, Base, engine$/;"	i
+TrainingInterval	processor.py	/^from database import User, HeartRate, IntervalScore, TrainingInterval$/;"	i
+TrainingInterval	scorer.py	/^from database import HeartRate, TrainingInterval$/;"	i
+User	authenticator.py	/^from database import User$/;"	i
+User	measurer.py	/^from database import IntervalScore, User$/;"	i
+User	processor.py	/^from database import User, HeartRate, IntervalScore, TrainingInterval$/;"	i
+Validator	endpoints.py	/^from validator import Validator$/;"	i
+Validator	measurer.py	/^from validator import Validator$/;"	i
+Validator	processor.py	/^from validator import Validator$/;"	i
+Validator	validator.py	/^class Validator:$/;"	c
+__init__	authenticator.py	/^    def __init__(self, logger):$/;"	m	class:Authenticator
+__init__	measurer.py	/^    def __init__(self, logger):$/;"	m	class:Measurer
+__init__	processor.py	/^    def __init__(self, logger, scorer, authenticator):$/;"	m	class:Processor
+__init__	scorer.py	/^    def __init__(self, logger):$/;"	m	class:Scorer
+__init__	validator.py	/^    def __init__(self, logger, authenticator):$/;"	m	class:Validator
+abort	endpoints.py	/^from flask import request, jsonify, abort, Flask$/;"	i
+addUser	endpoints.py	/^def addUser():$/;"	f
+addUser	processor.py	/^    def addUser(self, json, session):$/;"	m	class:Processor
+addUser	validator.py	/^    def addUser(self, request):$/;"	m	class:Validator
+app	endpoints.py	/^app = Flask(__name__)$/;"	v
+authenticate	authenticator.py	/^    def authenticate(self, id, password, session):$/;"	m	class:Authenticator
+authenticator	endpoints.py	/^authenticator = Authenticator(app.logger)$/;"	v
+bulkScore	endpoints.py	/^def bulkScore():$/;"	f
+bulkScore	processor.py	/^    def bulkScore(self, json, session):$/;"	m	class:Processor
+bulkScore	validator.py	/^    def bulkScore(self, request, session):$/;"	m	class:Validator
+calibrateUser	endpoints.py	/^def calibrateUser():$/;"	f
+calibrateUser	processor.py	/^    def calibrateUser(self, json, session):$/;"	m	class:Processor
+calibrateUser	validator.py	/^    def calibrateUser(self, request, session):$/;"	m	class:Validator
+commonAuthenticate	validator.py	/^    def commonAuthenticate(self, request, session):$/;"	m	class:Validator
+countUsers	measurer.py	/^    def countUsers(self, intervalScores, allUsers):$/;"	m	class:Measurer
+datetime	measurer.py	/^from datetime import datetime, timedelta$/;"	i
+datetime	processor.py	/^from datetime import datetime$/;"	i
+datetime	validator.py	/^from datetime import datetime$/;"	i
+desc	measurer.py	/^from sqlalchemy import desc$/;"	i
+engine	endpoints.py	/^from database.setup import Session, Base, engine$/;"	i
+func	processor.py	/^from sqlalchemy import func$/;"	i
+getHeartrateIntervals	processor.py	/^def getHeartrateIntervals(session, userID, startTime, endTime):$/;"	f
+getHeartrateIntervals	scorer.py	/^from processor import getHeartrateIntervals$/;"	i
+getcwd	endpoints.py	/^from os import listdir, getcwd, remove$/;"	i
+handler	endpoints.py	/^    handler = FileHandler("\/tmp\/mylogs.txt")$/;"	v
+hashPassword	authenticator.py	/^    def hashPassword(self, password):$/;"	m	class:Authenticator
+heart	endpoints.py	/^def heart():$/;"	f
+heart	processor.py	/^    def heart(self, json, session):$/;"	m	class:Processor
+heart	validator.py	/^    def heart(self, request, session):$/;"	m	class:Validator
+hello	endpoints.py	/^def hello():$/;"	f
+jsonify	endpoints.py	/^from flask import request, jsonify, abort, Flask$/;"	i
+last10Intervals	measurer.py	/^    def last10Intervals(self, intervalScores):$/;"	m	class:Measurer
+listdir	endpoints.py	/^from os import listdir, getcwd, remove$/;"	i
+measurer	endpoints.py	/^measurer = Measurer(app.logger)$/;"	v
+metrics	endpoints.py	/^def metrics():$/;"	f
+metrics	measurer.py	/^    def metrics(self, session):$/;"	m	class:Measurer
+numpy	scorer.py	/^import numpy$/;"	i
+os	scorer.py	/^import os.path$/;"	i
+passToProgram	scorer.py	/^def passToProgram(intervals):$/;"	f
+path	scorer.py	/^import os.path$/;"	i
+processor	endpoints.py	/^processor = Processor(app.logger, scorer, authenticator)$/;"	v
+remove	endpoints.py	/^from os import listdir, getcwd, remove$/;"	i
+request	endpoints.py	/^from flask import request, jsonify, abort, Flask$/;"	i
+score	endpoints.py	/^def score():$/;"	f
+score	processor.py	/^    def score(self, json, session):$/;"	m	class:Processor
+score	scorer.py	/^    def score(self, userID, heartrates, intervals, session):$/;"	m	class:Scorer
+score	validator.py	/^    def score(self, request, session):$/;"	m	class:Validator
+scorer	endpoints.py	/^scorer = Scorer(app.logger)$/;"	v
+sha512	authenticator.py	/^from hashlib import sha512$/;"	i
+sys	endpoints.py	/^import sys$/;"	i
+timedelta	measurer.py	/^from datetime import datetime, timedelta$/;"	i
+trainCalibrationIntervals	scorer.py	/^        def trainCalibrationIntervals(self, session):$/;"	f	function:Scorer.score
+training	endpoints.py	/^def training():$/;"	f
+training	processor.py	/^    def training(self, json, session):$/;"	m	class:Processor
+training	validator.py	/^    def training(self, request, session):$/;"	m	class:Validator
+uuid4	authenticator.py	/^from uuid import uuid4$/;"	i
+validator	endpoints.py	/^validator = Validator(app.logger, authenticator)$/;"	v
+verifyTime	validator.py	/^    def verifyTime(self, time):$/;"	m	class:Validator
+verifyUser	authenticator.py	/^    def verifyUser(self, userName, password, session): $/;"	m	class:Authenticator
+verifyUser	endpoints.py	/^def verifyUser():$/;"	f
+verifyUser	processor.py	/^    def verifyUser(self, json, session):$/;"	m	class:Processor
+verifyUser	validator.py	/^    def verifyUser(self, request):$/;"	m	class:Validator
