@@ -22,7 +22,7 @@ measurer = Measurer(app.logger)
 # set up logging (for linux)
 if sys.platform == "linux2":
     from logging import FileHandler, INFO
-    handler = FileHandler("/tmp/mylogs.txt")
+    handler = FileHandler("/tmp/mango_logs.txt")
     handler.setLevel(INFO)
     app.logger.addHandler(handler)
 

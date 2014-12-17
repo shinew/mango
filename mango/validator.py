@@ -30,26 +30,33 @@ class Validator:
             return False
 
         if "resources" not in request.json or type(request.json["resources"]) is not list:
+            self.logger.warning('"resources" not in request')
             return False
 
         for item in request.json["resources"]:
             if "sensorType" not in item or type(item["sensorType"]) is not unicode or \
                 "time" not in item or type(item["time"]) is not unicode or \
                 "value" not in item:
+                self.logger.warning("basic types not in request")
                 return False
             if not self.verifyTime(item["time"]):
+                self.logger.warning("time is in wrong format")
                 return False
 
-            if item["sensorType"] == u"hr":
+            if item["sensorType"] == u"heartRate":
                 if type(item["value"]) is not int:
+                    self.logger.warning('"hr" is in wrong format')
                     return False
             elif item["sensorType"] == u"hrv":
                 if type(item["value"]) is not list:
+                    self.logger.warning('"hrv" is in wrong format')
                     return False
                 for value in item["value"]:
-                    if type(item["value"]) is not int:
+                    if type(value) is not int:
+                        self.logger.warning('"hrv" values are in wrong format')
                         return False
             else:
+                self.logger.warning("format does not exist")
                 return False
 
         return True

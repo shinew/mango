@@ -32,10 +32,10 @@ class Processor:
             time = datetime.strptime(sample["time"], Validator.DATE_FORMAT)
 
             if sample["sensorType"] == u"heartRate":
-                session.add(Resource(logTime=datetime.now(), userID=json["ID"], time=time, type="heartRate", value=sample["value"]))
+                session.add(Resource(logTime=datetime.now(), userID=userID, time=time, type="heartRate", value=sample["value"]))
             else:
                 for value in sample["value"]:
-                    session.add(Resource(logTime=datetime.now(), userID=json["ID"], time=time, type="hrv", value=value))
+                    session.add(Resource(logTime=datetime.now(), userID=userID, time=time, type="hrv", value=value))
         session.commit()
 
 

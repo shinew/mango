@@ -3,9 +3,9 @@ Contains the configuration variables for Database connections
 """
 
 DATABASE = {
-    "database": "Tart",
+    "database": "tart",
     "server": "localhost",
     "user": "shine",
-    "password": "Ilovetart2014"
+    "password": "Ilovecake2014"
 }
 
