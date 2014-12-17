@@ -1,20 +1,17 @@
 from sqlalchemy import func
 from datetime import datetime, timedelta
-from database import User, HeartRate, IntervalScore, TrainingInterval
+from database import User, Resource, IntervalScore, TrainingInterval
 from authenticator import Authenticator
 from validator import Validator
 
 
-def getHeartrateIntervals(session, userID, startTime, endTime):
-        queryHeartRate = session.query(HeartRate).filter(HeartRate.userID == userID, HeartRate.time >= startTime, HeartRate.time <= endTime).all()
-        queryHeartRate.sort(key=lambda x: x.time)
-        heartRates = []
+def getHRVIntervals(session, userID, startTime, endTime):
+        queryResource = session.query(Resource).filter(Resource.userID == userID, Resource.time >= startTime, Resource.time <= endTime, Resource.type == "hrv").all()
+        queryResource.sort(key=lambda x: x.time)
         intervals = []
-        for heartRate in queryHeartRate:
-            heartRates.append(heartRate.hr)
-            if heartRate.hrv is not None:
-                intervals.append(heartRate.hrv) 
-        return heartRates, intervals
+        for resource in queryResource:
+            intervals.append(resource.hrv) 
+        return intervals
 
 class Processor:
     """ Sends the JSON data to Database, or outputs JSON data. """
@@ -31,14 +28,14 @@ class Processor:
         @return: None
         """
 
-        for sample in json["Samples"]:
-            time = datetime.strptime(sample["Time"], Validator.DATE_FORMAT)
+        for sample in json["resources"]:
+            time = datetime.strptime(sample["time"], Validator.DATE_FORMAT)
 
-            if sample["HRV"] is not None:
-                for hrv in sample["HRV"]:
-                    session.add(HeartRate(logTime=datetime.now(), userID=json["ID"], device=sample["Device"], time=time, hasMovement=sample["Movement"], hr=sample["HR"], hrv=hrv))
+            if sample["sensorType"] == u"heartRate":
+                session.add(Resource(logTime=datetime.now(), userID=json["ID"], time=time, type="heartRate", value=sample["value"]))
             else:
-                session.add(HeartRate(logTime=datetime.now(), userID=json["ID"], device=sample["Device"], time=time, hasMovement=sample["Movement"], hr=sample["HR"], hrv=None))
+                for value in sample["value"]:
+                    session.add(Resource(logTime=datetime.now(), userID=json["ID"], time=time, type="hrv", value=value))
         session.commit()
 
 
@@ -49,7 +46,7 @@ class Processor:
         @return: an int representing the stress score, or None if a stress score could not be calculated over that interval
         """
 
-        endTime = datetime.strptime(json["time"])
+        endTime = datetime.strptime(json["time"], Validator.DATE_FORMAT)
         startTime = endTime - timedelta(minutes=5)
 
         self.logger.info("Score query: {Start: %s, End: %s}", startTime, endTime)
@@ -60,8 +57,8 @@ class Processor:
             return queryIntervalScore.score
 
         # otherwise do machine learning
-        heartRates, intervals = getHeartrateIntervals(session, id, startTime, endTime) 
-        output = self.scorer.score(userID, heartRates, intervals, session)
+        intervals = getHRVIntervals(session, id, startTime, endTime) 
+        output = self.scorer.score(userID, intervals, session)
         if output is None:
             if json["format"] == u"state":
                 return {"state": None}

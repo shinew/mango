@@ -2,20 +2,19 @@ from sqlalchemy import Column, Integer, Boolean, String
 from sqlalchemy.types import DateTime, BigInteger
 from setup import Base
 
-class HeartRate(Base):
+class Resource (Base):
     """ Table of heart rate data """
 
-    __tablename__ = "HeartRate" 
+    __tablename__ = "Resource" 
 
     logTime = Column("LogTime", DateTime, nullable=False)
     id = Column(BigInteger, primary_key=True)
     userID = Column("UserID", Integer, nullable=False) # "should" have a ForeignKey reference to User.ID, but no cascades
-    device = Column("Device", String(255), nullable=False)
     time = Column("Time", DateTime, nullable=False)
-    hasMovement = Column("HasMovement", Boolean, nullable=False)
-    hr = Column("HR", Integer)
-    hrv = Column("HRV", Integer)
+    type = Column("Type", String(10), nullable=False)
+    value = Column("Value", Integer, nullable=False)
 
     def __repr__(self):
-        return "<HeartRate(UserID='%s', Device='%s', Time='%s', HasMovement='%s', HR='%s', HRV='%s'>" % \
-            (self.userID, self.device, self.time, self.hasMovement, self.hr, self.hrv)
+        return "<Resource(UserID='%s', time='%s', type='%s', value='%s'>" % \
+            (self.userID, self.time, self.type, self.value)
+

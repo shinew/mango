@@ -2,8 +2,8 @@ import os.path
 import numpy
 from subprocess import Popen, PIPE, STDOUT
 from sklearn.ensemble import RandomForestClassifier
-from database import HeartRate, TrainingInterval
-from processor import getHeartrateIntervals
+from database import Resource, TrainingInterval
+from processor import getHRVIntervals
 
 
 def passToProgram(intervals):
@@ -25,10 +25,10 @@ class Scorer:
     def __init__(self, logger):
         self.logger = logger
 
-    def score(self, userID, heartrates, intervals, session):
+    def score(self, userID, intervals, session):
         """
-        Input: list of heartrates (int, beats/min) and intervals (int, ms)
-        Output: a float representing the score and the feature string, or None if it cannot be calculated
+        Input: list of rrIntervals (int, ms)
+        Output: a float [0.0, 100.0] representing the score and the feature string, or None if it cannot be calculated
         """
 
         # minimal interval requirements
@@ -63,7 +63,7 @@ class Scorer:
             if interval.featureCache is not None and interval.featureCacheVersion == Scorer.CURRENT_FEATURE_VERSION:
                 features = map(lambda x: float(x.split()[2]), interval.featureCache.splitlines()) 
             else:
-                heartrate, intervals = getHeartrateIntervals(session, interval.userID, interval.startTime, interval.endTime)
+                intervals = getHRVIntervals(session, interval.userID, interval.startTime, interval.endTime)
                 if len(intervals) < 128:
                     # Warning: this value is deliberately different from 256 as some legacy training intervals have shorter lengths due to truncation)
                     self.logger.warning(
