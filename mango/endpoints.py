@@ -46,7 +46,7 @@ def addSensorData(userID):
     session.close()
     return jsonify({}), 200
 
-@app.route("/v2.0/users/<int:userID>/sensors", methods=["POST"])
+@app.route("/v2.0/users/<int:userID>/scores", methods=["POST"])
 def getScore(userID):
     """
     Returns a stress score.
