@@ -60,6 +60,20 @@ def getScore(userID):
     session.close()
     return jsonify(result), 200
 
+@app.route("/v2.0/users", methods=["POST"])
+def addUser():
+    """
+    Adds a new user.
+    """
+
+    session = Session()
+    if not validator.addUser(request, session):
+        session.close()
+        abort(400)
+    userID = processor.addUser(request.json, session)
+    session.close()
+    return jsonify({"userID": userID}), 200
+
 if __name__ == "__main__":
    app.run(host='0.0.0.0', debug=True)
 

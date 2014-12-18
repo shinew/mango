@@ -80,3 +80,11 @@ class Processor:
         else:
             return {"score": score}
 
+    def addUser(self, json, session):
+        salt, hashedPassword = self.authenticator.hashPassword(json["password"])
+        newUser = User(passwordHash=hashedPassword, passwordSalt=salt)
+
+        session.add(newUser)
+        session.commit()
+        return newUser.id
+

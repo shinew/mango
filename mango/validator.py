@@ -9,7 +9,7 @@ class Validator:
         self.authenticator = authenticator
 
     def addSensorData(self, userID, request, session):
-        if not self.commonAuthenticate(request, session):
+        if not self.commonAuthenticate(userID, request, session):
             return False
 
         if "resources" not in request.json or type(request.json["resources"]) is not list:
@@ -45,7 +45,7 @@ class Validator:
         return True
 
     def getScore(self, userID, request, session):
-        if not self.commonAuthenticate(request, session):
+        if not self.commonAuthenticate(userID, request, session):
             return False
 
         if "time" not in request.json or type(request.json["time"]) is not unicode or \
@@ -60,11 +60,24 @@ class Validator:
 
         return True
 
+    def addUser(self, request, session):
+        if not request.json:
+            self.logger.warning("Request did not send JSON")
+            return False
+
+        if "password" not in request.json:
+            return False
+
+        if type(request.json["password"]) is not unicode:
+            return False
+
+        return True
+
     def commonAuthenticate(self, userID, request, session):
         if not request.json:
             self.logger.warning("Request did not send JSON")
             return False
-        return True
+
         if "password" not in request.json:
             return False
 

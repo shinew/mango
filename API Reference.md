@@ -23,7 +23,7 @@ Returns 200 if the data was accepted. Returns 400 if the data could not be accep
 {
     "resources": [
         {
-            "sensorType": "hr",
+            "sensorType": "heartRate",
             "time": "2014-11-21 16:55:22",
             "value": 65
         },
@@ -32,7 +32,8 @@ Returns 200 if the data was accepted. Returns 400 if the data could not be accep
             "time": "2014-11-21 16:55:22",
             "value": [1034, 938]
         }
-    ]
+    ],
+    "password": "password"
 }
 ```
 
@@ -64,7 +65,8 @@ Request:
 ```json
 {
     "time": "2014-11-21 16:55:22",
-    "format": "state"
+    "format": "state",
+    "password": "password"
 }
 ```
 
