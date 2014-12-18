@@ -8,24 +8,7 @@ class Validator:
         self.logger = logger
         self.authenticator = authenticator
 
-    def commonAuthenticate(self, request, session):
-        if not request.json:
-            self.logger.warning("Request did not send JSON")
-            return False
-        return True
-        """
-        if "ID" not in request.json or "Password" not in request.json:
-            self.logger.warning("Missing ID or Password")
-            return False
-        if type(request.json["ID"]) is not int or type(request.json["Password"]) is not unicode:
-            self.logger.warning("ID or Password in wrong format(s)")
-            return False
-        if not self.authenticator.authenticate(request.json["ID"], request.json["Password"], session):
-            self.logger.warning("Authentication failed")
-            return False
-        """
-
-    def addSensorData(self, request, session):
+    def addSensorData(self, userID, request, session):
         if not self.commonAuthenticate(request, session):
             return False
 
@@ -61,7 +44,7 @@ class Validator:
 
         return True
 
-    def getScore(self, request, session):
+    def getScore(self, userID, request, session):
         if not self.commonAuthenticate(request, session):
             return False
 
@@ -75,6 +58,22 @@ class Validator:
         if request.json["format"] not in [u"state", u"score"]:
             return False
 
+        return True
+
+    def commonAuthenticate(self, userID, request, session):
+        if not request.json:
+            self.logger.warning("Request did not send JSON")
+            return False
+        return True
+        if "password" not in request.json:
+            return False
+
+        if type(request.json["password"]) is not unicode:
+            return False
+
+        if not self.authenticator.authenticate(userID, request.json["password"], session):
+            self.logger.warning("Authentication failed")
+            return False
         return True
 
     def verifyTime(self, time):

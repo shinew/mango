@@ -39,7 +39,7 @@ def addSensorData(userID):
     """
 
     session = Session()
-    if not validator.addSensorData(request, session):
+    if not validator.addSensorData(userID, request, session):
         session.close()
         abort(400)
     processor.addSensorData(userID, request.json, session)
@@ -53,7 +53,7 @@ def getScore(userID):
     """
 
     session = Session()
-    if not validator.getScore(request, session):
+    if not validator.getScore(userID, request, session):
         session.close()
         abort(400)
     result = processor.getScore(userID, request.json, session)
